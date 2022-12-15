@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { GET_PROJECT } from "../queries/projectQueries";
 import ClientInfo from "../components/ClientInfo";
 import Spinner from "../components/Spinner";
-import DeleteProject from "../components/DeleteProject";
 import EditProjectForm from "../components/EditProjectForm";
 
 export default function Project() {
