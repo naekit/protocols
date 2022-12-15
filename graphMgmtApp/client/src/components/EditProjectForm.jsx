@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useMutation } from "@apollo/client"
 import { GET_PROJECT } from "../queries/projectQueries"
+import { UPDATE_PROJECT } from "../mutations/projectMutations";
+import DeleteProject from "./DeleteProject";
 
 
 export default function EditProjectForm({ project }) {
@@ -8,12 +10,20 @@ export default function EditProjectForm({ project }) {
   const [ description, setDescription ] = useState(project.description);
   const [ status, setStatus ] = useState('');
 
+  const [ updateProject ] = useMutation(UPDATE_PROJECT, {
+    variables: { id: project.id, name, description, status},
+    refetchQueries: [{ query: GET_PROJECT, variables: {id: project.id}}]
+  })
+
   const onSubmit = (e) => {
     e.preventDefault()
 
     if( !name || !description || !status){
         return alert(`Please fill out all fields`)
     }
+
+    updateProject(name, description, status)
+
   }
 
   return (
@@ -47,7 +57,10 @@ export default function EditProjectForm({ project }) {
                     <option value="completed">Completed</option>
                 </select>
             </div>
+            <div className="d-flex mt-5 ms-auto justify-content-between">
             <button type="submit" className="btn btn-primary">Submit</button>
+            <DeleteProject id={project.id} />
+            </div>
         </form>
     </div>
   )

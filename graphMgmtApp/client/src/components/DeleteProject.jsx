@@ -21,11 +21,9 @@ export default function DeleteProject({ id }) {
   }
 
   return (
-    <div className="d-flex mt-5 ms-auto">
-      <button className="btn d-flex justify-content-center align-items-center btn-warning btn-lg" onClick={ deleteClick }>
+      <button className="btn d-flex justify-content-center align-items-center btn-danger btn-sm" onClick={ deleteClick }>
           <FaTrash className="m-2" />
           <p className="m-2">Delete Project</p>
       </button>
-    </div>
   )
 }
